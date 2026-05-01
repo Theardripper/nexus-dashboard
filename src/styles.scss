@@ -1,0 +1,102 @@
+// ─── Global Reset & Theme ────────────────────────────────────────────────────
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --sidebar-bg: #0f172a;
+  --sidebar-border: rgba(255, 255, 255, 0.07);
+  --sidebar-text: #64748b;
+  --sidebar-text-active: #a5b4fc;
+  --sidebar-accent: #6366f1;
+  --sidebar-hover: rgba(255, 255, 255, 0.04);
+  --sidebar-active-bg: rgba(99, 102, 241, 0.12);
+
+  --topbar-height: 60px;
+  --sidebar-width: 220px;
+
+  --color-bg: #f8fafc;
+  --color-surface: #ffffff;
+  --color-border: #e2e8f0;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #64748b;
+  --color-text-muted: #94a3b8;
+
+  --color-indigo: #6366f1;
+  --color-indigo-light: rgba(99, 102, 241, 0.1);
+  --color-green: #22c55e;
+  --color-red: #ef4444;
+  --color-amber: #f59e0b;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+html,
+body {
+  height: 100%;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+// ─── Scrollbar ───────────────────────────────────────────────────────────────
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 2px;
+}
+
+// ─── Utilities ───────────────────────────────────────────────────────────────
+.text-primary   { color: var(--color-text-primary); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-muted     { color: var(--color-text-muted); }
+.text-indigo    { color: var(--color-indigo); }
+.text-green     { color: var(--color-green); }
+.text-red       { color: var(--color-red); }
+.text-amber     { color: var(--color-amber); }
+
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+
+  &.badge-indigo {
+    background: var(--color-indigo-light);
+    color: var(--color-indigo);
+  }
+  &.badge-green {
+    background: rgba(34, 197, 94, 0.1);
+    color: var(--color-green);
+  }
+  &.badge-red {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--color-red);
+  }
+  &.badge-amber {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--color-amber);
+  }
+}
