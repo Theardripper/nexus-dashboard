@@ -1,44 +1,43 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { DashboardService } from './services/dashboard.service';
-import { Metric } from './models/dashboard.models';
+import { Component } from '@angular/core';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { TopbarComponent } from './components/topbar/topbar.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
+  imports: [SidebarComponent, TopbarComponent],
   template: `
-    <div class="placeholder">
-      <div class="logo-mark">◆</div>
-      <h1>Nexus Dashboard</h1>
-      <p>Data layer ready — {{ metrics.length }} metrics loaded from service.</p>
-      <ul>
-        @for (m of metrics; track m.label) {
-          <li><strong>{{ m.label }}</strong>: {{ m.value }}</li>
-        }
-      </ul>
+    <div class="app-shell">
+      <app-sidebar />
+      <div class="main-area">
+        <app-topbar />
+        <main class="content-area">
+          <p>Layout shell done. Metric cards and charts coming next.</p>
+        </main>
+      </div>
     </div>
   `,
   styles: [`
-    .placeholder {
+    .app-shell {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 12px;
       height: 100vh;
-      font-family: Inter, sans-serif;
+      overflow: hidden;
     }
-    .logo-mark { font-size: 32px; color: #6366f1; }
-    h1  { font-size: 22px; font-weight: 600; color: #0f172a; margin: 0; }
-    p   { font-size: 14px; color: #64748b; margin: 0; }
-    ul  { list-style: none; padding: 0; font-size: 13px; color: #475569; }
-    li  { padding: 2px 0; }
+    .main-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      background: var(--color-bg);
+    }
+    .content-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+      font-family: Inter, sans-serif;
+      font-size: 14px;
+      color: var(--color-text-secondary);
+    }
   `],
 })
-export class AppComponent implements OnInit {
-  private svc = inject(DashboardService);
-  metrics: Metric[] = [];
-
-  ngOnInit() {
-    this.svc.metrics$.subscribe(m => this.metrics = m);
-  }
-}
+export class AppComponent {}
