@@ -1,18 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { TopbarComponent } from './components/topbar/topbar.component';
+import { MetricCardComponent } from './components/metric-card/metric-card.component';
+import { ChartWidgetComponent } from './components/chart-widget/chart-widget.component';
+import { DashboardService } from './services/dashboard.service';
+import { Metric, ChartDataPoint } from './models/dashboard.models';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [SidebarComponent, TopbarComponent],
+  imports: [SidebarComponent, TopbarComponent, MetricCardComponent, ChartWidgetComponent],
   template: `
     <div class="app-shell">
       <app-sidebar />
       <div class="main-area">
         <app-topbar />
         <main class="content-area">
-          <p>Layout shell done. Metric cards and charts coming next.</p>
+          <div class="metrics-grid">
+            @for (metric of metrics; track metric.label) {
+              <app-metric-card [metric]="metric" />
+            }
+          </div>
+          <div style="margin-top: 20px;">
+            <app-chart-widget [data]="chartData" />
+          </div>
         </main>
       </div>
     </div>
@@ -34,10 +45,21 @@ import { TopbarComponent } from './components/topbar/topbar.component';
       flex: 1;
       overflow-y: auto;
       padding: 24px;
-      font-family: Inter, sans-serif;
-      font-size: 14px;
-      color: var(--color-text-secondary);
+    }
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
     }
   `],
 })
-export class AppComponent {}
+export class AppComponent implements OnInit {
+  private svc = inject(DashboardService);
+  metrics: Metric[] = [];
+  chartData: ChartDataPoint[] = [];
+
+  ngOnInit() {
+    this.svc.metrics$.subscribe(m => this.metrics = m);
+    this.svc.chartData$.subscribe(c => this.chartData = c);
+  }
+}
