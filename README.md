@@ -103,7 +103,7 @@ The output will be in `dist/nexus-dashboard/`.
 
 ## 📸 Screenshots
 
-> _Add screenshots or a GIF here once you have the app running locally._
+![alt text](<Captura de tela de 2026-05-04 15-38-57.png>)
 
 ---
 
