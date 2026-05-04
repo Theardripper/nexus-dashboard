@@ -3,13 +3,19 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { TopbarComponent } from './components/topbar/topbar.component';
 import { MetricCardComponent } from './components/metric-card/metric-card.component';
 import { ChartWidgetComponent } from './components/chart-widget/chart-widget.component';
+import { UsersTableComponent } from './components/users-table/users-table.component';
+import { ActivityFeedComponent } from './components/activity-feed/activity-feed.component';
 import { DashboardService } from './services/dashboard.service';
-import { Metric, ChartDataPoint } from './models/dashboard.models';
+import { Metric, ChartDataPoint, User, Activity } from './models/dashboard.models';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [SidebarComponent, TopbarComponent, MetricCardComponent, ChartWidgetComponent],
+  imports: [
+    SidebarComponent, TopbarComponent,
+    MetricCardComponent, ChartWidgetComponent,
+    UsersTableComponent, ActivityFeedComponent,
+  ],
   template: `
     <div class="app-shell">
       <app-sidebar />
@@ -21,8 +27,12 @@ import { Metric, ChartDataPoint } from './models/dashboard.models';
               <app-metric-card [metric]="metric" />
             }
           </div>
-          <div style="margin-top: 20px;">
+          <div class="two-col" style="margin-top: 20px;">
             <app-chart-widget [data]="chartData" />
+            <app-activity-feed [activity]="activity" />
+          </div>
+          <div style="margin-top: 20px;">
+            <app-users-table [users]="users" />
           </div>
         </main>
       </div>
@@ -51,15 +61,24 @@ import { Metric, ChartDataPoint } from './models/dashboard.models';
       grid-template-columns: repeat(4, 1fr);
       gap: 14px;
     }
+    .two-col {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 14px;
+    }
   `],
 })
 export class AppComponent implements OnInit {
   private svc = inject(DashboardService);
   metrics: Metric[] = [];
   chartData: ChartDataPoint[] = [];
+  users: User[] = [];
+  activity: Activity[] = [];
 
   ngOnInit() {
     this.svc.metrics$.subscribe(m => this.metrics = m);
     this.svc.chartData$.subscribe(c => this.chartData = c);
+    this.svc.users$.subscribe(u => this.users = u);
+    this.svc.activity$.subscribe(a => this.activity = a);
   }
 }
