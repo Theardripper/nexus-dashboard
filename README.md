@@ -134,6 +134,4 @@ Don't forget to add `provideHttpClient()` in `app.config.ts`.
 
 ---
 
-## 📄 License
-
-MIT © 2024 — feel free to use this in your projects.
+### Made for Luiz Eduardo da Silva Moura
