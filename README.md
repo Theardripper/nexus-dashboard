@@ -134,4 +134,4 @@ Don't forget to add `provideHttpClient()` in `app.config.ts`.
 
 ---
 
-### Made for Luiz Eduardo da Silva Moura
+### Made by Luiz Eduardo da Silva Moura
