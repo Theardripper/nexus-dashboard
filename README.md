@@ -103,7 +103,7 @@ The output will be in `dist/nexus-dashboard/`.
 
 ## 📸 Screenshots
 
-> _Add screenshots or a GIF here once you have the app running locally._
+![alt text](<Captura de tela de 2026-05-04 15-38-57.png>)
 
 ---
 
@@ -134,6 +134,4 @@ Don't forget to add `provideHttpClient()` in `app.config.ts`.
 
 ---
 
-## 📄 License
-
-MIT © 2024 — feel free to use this in your projects.
+### Made for Luiz Eduardo da Silva Moura
